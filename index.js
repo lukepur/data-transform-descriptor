@@ -5,10 +5,6 @@ validate.validators.isArray = function (value, opts, key, attributes) {
 };
 
 module.exports = function (inputContstraints, outputConstraints, fn, meta = {}) {
-  console.log('validate:', validate({input: []}, inputContstraints));
-  console.log('inputContstraints:', inputContstraints);
-  console.log('meta:', meta);
-
   return {
     meta () {
       return JSON.stringify(meta, null, 2);
