@@ -7,7 +7,10 @@ validate.validators.isArray = function (value, opts, key, attributes) {
 module.exports = function (inputContstraints, outputConstraints, fn, meta = {}) {
   return {
     meta () {
-      return JSON.stringify(meta, null, 2);
+      return JSON.stringify(Object.assign({}, meta, {
+        inputContstraints,
+        outputConstraints
+      }), null, 2);
     },
     validateInput (input) {
       return validate(input, inputContstraints);
