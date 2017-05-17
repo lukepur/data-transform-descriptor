@@ -14,7 +14,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       );
     },
     validateInput (input) {
-      return validate(input, inputContstraints);
+      return validate(input, inputConstraints);
     },
     run (input) {
       // validate input
