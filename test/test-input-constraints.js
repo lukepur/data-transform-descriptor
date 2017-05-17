@@ -1,7 +1,10 @@
 module.exports = function () {
   return {
-    input: {
-      isArray: true
+    numbers: {
+      isArrayOf: {
+        type: 'number',
+        minLength: 2
+      }
     }
   }
 };

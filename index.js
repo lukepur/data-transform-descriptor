@@ -1,8 +1,5 @@
 const validate = require('validate.js');
-
-validate.validators.isArray = function (value, opts, key, attributes) {
-  return Array.isArray(value) ? null : 'is not an array';
-};
+require('./validators/validators')(validate);
 
 module.exports = function (inputContstraints, outputConstraints, fn, meta = {}) {
   return {
@@ -16,9 +13,19 @@ module.exports = function (inputContstraints, outputConstraints, fn, meta = {}) 
       return validate(input, inputContstraints);
     },
     run (input) {
-      const validateResults = validate(input, inputContstraints);
-      if (validateResults) return validateResults;
-      return fn(input);
+      // validate input
+      const inputValidateResults = validate(input, inputContstraints);
+      if (inputValidateResults) return { inputErrors: inputValidateResults };
+
+      // run fn
+      const output = fn(input);
+      
+      // validate output
+      const outputValidateResults = validate({ output }, outputConstraints);
+      if (outputValidateResults) return { outputErrors: outputValidateResults}
+
+      // completed successfully
+      return output;
     }
   }
 };

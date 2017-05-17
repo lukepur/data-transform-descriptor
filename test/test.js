@@ -1,10 +1,11 @@
-const transformer = require('../index.js');
-const inputContstraints = require('./test-input-constraints.js');
+const transformer = require('../index');
+const inputContstraints = require('./test-input-constraints');
+const outputContstraints = require('./test-output-constraints');
+const fn = require('./test-input-fn');
 
-const myTransformer = transformer(inputContstraints(), {}, (input)=>{
-  console.log('running worker on', input);
-  return 200;
-}, {name: 'Worker'});
+const myTransformer = transformer(inputContstraints(), outputContstraints(), fn, {name: 'Worker'});
 
 console.log('calling meta():', myTransformer.meta());
-console.log('running...', myTransformer.run({input: [1]}));
+console.log('running...', myTransformer.run({numbers: [1, 2, 3]}));
+
+process.exit();
