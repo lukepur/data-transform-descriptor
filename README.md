@@ -1,4 +1,4 @@
-# data-transformer
+# data-transform-descriptor
 A tiny module to describe and implement data transforms/mappings.
 
 Uses validate.js (and some custom validators) to document a data transformation in terms of input and output requirements.
@@ -6,13 +6,13 @@ Uses validate.js (and some custom validators) to document a data transformation 
 ## Installation
 
 ```
-npm install data-transformer
+npm install data-transform-descriptor
 ```
 
 ## Usage
 
 ```
-const createTransformer = require('data-transformer');
+const createTransformer = require('data-transform-descriptor');
 
 const adder = createTransformer(
     // input constraints (see validate.js)
@@ -44,7 +44,7 @@ adder.run({a: 1});
 
 ## Why?
 
-The motivation for data-transformer is to build a simple framework for describing units of work against data.
+The motivation for data-transform-descriptor is to build a simple framework for describing units of work against data.
 
 This could be enhanced with tooling to build rich systems for composing these units of work into much more useful
 workflows.

@@ -1,5 +1,5 @@
 {
-  "name": "data-transformer",
+  "name": "data-transform-descriptor",
   "version": "0.0.1",
   "description": "A tiny module to describe and implement data transforms/mappings.",
   "main": "index.js",
