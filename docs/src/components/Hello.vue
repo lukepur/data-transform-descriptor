@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg[0].run({a:1, b:2}) }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
@@ -21,11 +21,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'hello',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  computed: {
+    ...mapGetters({
+      transformers: 'transformers'
+    }),
+    msg () {
+      return this.transformers;
     }
   }
 }

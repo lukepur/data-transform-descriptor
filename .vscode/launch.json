@@ -13,6 +13,12 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Test use case (UNIX)",
+            "program": "${workspaceRoot}/test/test.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceRoot}\\index.js"
         }
