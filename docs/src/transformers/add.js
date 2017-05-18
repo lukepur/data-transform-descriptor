@@ -9,7 +9,7 @@ const outputConstraints = {
 };
 const fn = (input) => input.a + input.b;
 const meta = {
-  name: 'add'
+  name: 'Add'
 };
 
 export default CreateTransformer(inputConstraints, outputConstraints, fn, meta);
