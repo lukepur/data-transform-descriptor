@@ -1,4 +1,4 @@
-import CreateTransformer from '../../../index';
+import CreateTransformer from 'data-transform-descriptor';
 
 const inputConstraints = {
   a: { presence: true, isNumber: true },

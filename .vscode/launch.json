@@ -8,19 +8,21 @@
             "type": "node",
             "request": "launch",
             "name": "Test use case",
-            "program": "${workspaceRoot}\\test\\test.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Test use case (UNIX)",
             "program": "${workspaceRoot}/test/test.js"
         },
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}\\index.js"
+            "name": "Debug Dev Server",
+            "cwd": "${workspaceRoot}/docs",
+            "program": "${workspaceRoot}/docs/build/dev-server.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Prod build",
+            "cwd": "${workspaceRoot}/docs",
+            "program": "${workspaceRoot}/docs/build/build.js"
         }
     ]
 }
