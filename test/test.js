@@ -1,5 +1,5 @@
 const assert = require('assert');
-const transformer = require('../index');
+const transformer = require('../src/index');
 const inputConstraints = require('./test-input-constraints');
 const outputConstraints = require('./test-output-constraints');
 const fn = require('./test-input-fn');
