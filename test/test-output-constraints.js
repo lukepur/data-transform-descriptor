@@ -2,7 +2,7 @@
 module.exports = function () {
   return {
     output: {
-        isNumber: true,
+        dataType: "number",
         presence: true
     }
   };

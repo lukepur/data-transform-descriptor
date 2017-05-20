@@ -5,10 +5,8 @@
 module.exports = function () {
   return {
     numbers: {
-      isArrayOf: {
-        type: 'number',
-        minLength: 2
-      }
+      dataType: 'array_of_numbers',
+      minArrayLength: 2
     }
   }
 };

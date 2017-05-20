@@ -10,10 +10,10 @@ assert.equal(adder.meta().name, 'Worker');
 assert.notEqual(adder.meta().inputConstraints, undefined);
 assert.notEqual(adder.meta().outputConstraints, undefined);
 assert.equal(adder.validateInput({numbers: [1,2]}), undefined);
-assert.equal(adder.validateInput({numbers: ['1',2]}).numbers[0], 'Numbers should only contain members of type number');
+assert.equal(adder.validateInput({numbers: ['1',2]}).numbers[0], 'Numbers must be an array of numbers (some items aren\'t "number" type)');
 assert.equal(adder.run({numbers: [1,2,3]}), 6);
-assert.equal(adder.run({}).inputErrors.numbers[0], 'Numbers is not an array');
-assert.equal(adder.run({numbers: ['1',2,3]}).inputErrors.numbers[0], 'Numbers should only contain members of type number');
+assert.equal(adder.run({}).inputErrors.numbers[0], 'Numbers must be an array of numbers (got undefined)');
+assert.equal(adder.run({numbers: ['1',2,3]}).inputErrors.numbers[0], 'Numbers must be an array of numbers (some items aren\'t "number" type)');
 
 console.log('Tests successful');
 
