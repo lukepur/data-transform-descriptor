@@ -7,9 +7,9 @@ const inputConstraints = {
 const outputConstraints = {
   output: { presence: true, dataType: 'number' }
 };
-const fn = (input) => input.a + input.b;
+const fn = (input) => input.a - input.b;
 const meta = {
-  name: 'Add'
+  name: 'Subtract'
 };
 
 export default CreateTransformer(inputConstraints, outputConstraints, fn, meta);

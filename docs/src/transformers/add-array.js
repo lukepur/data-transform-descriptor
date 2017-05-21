@@ -1,15 +1,14 @@
 import CreateTransformer from 'data-transform-descriptor';
 
 const inputConstraints = {
-  a: { presence: true, dataType: 'number' },
-  b: { presence: true, dataType: 'number' }
+  targets: { presence: true, dataType: 'array_of_number' }
 };
 const outputConstraints = {
   output: { presence: true, dataType: 'number' }
 };
-const fn = (input) => input.a + input.b;
+const fn = (input) => input.targets.reduce((memo, item) => memo + item, 0);
 const meta = {
-  name: 'Add'
+  name: 'Add Array'
 };
 
 export default CreateTransformer(inputConstraints, outputConstraints, fn, meta);
