@@ -3,6 +3,8 @@ A tiny module to describe and implement data transforms/mappings.
 
 Uses validate.js (and some custom validators) to document a data transformation in terms of input and output requirements.
 
+Demo site: [https://lukepur.github.io/data-transform-descriptor/](https://lukepur.github.io/data-transform-descriptor/)
+
 ## Installation
 
 ```
