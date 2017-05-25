@@ -18,10 +18,28 @@ const createTransformer = require('data-transform-descriptor');
 
 const adder = createTransformer(
     // input constraints (see validate.js)
-    { a: { presence: true, isNumber: true }, b: { presence: true, isNumber: true } },
+   [
+        {
+            id: 'a',
+            type: 'number',
+            required: true
+        },
+        {
+            id: 'b',
+            type: 'number',
+            required: true
+        }
+    ],
     // output constraints
-    { output: { presence: true, isNumber: true }},
-    input => input.a + input.b,
+    {
+        type: 'number'
+    },
+    // worker resolvable
+    {
+        fn: add,
+        args: ['$.a', '$.b']
+    },
+    // meta
     { name: 'Adder' }
 );
 

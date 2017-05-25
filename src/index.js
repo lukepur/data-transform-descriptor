@@ -1,7 +1,11 @@
-const validate = require('validate.js');
-require('./validators/validators')(validate);
+const Validator = require('data-structure-validator');
+const validatorContext = {
+  isNumber: value => typeof value === 'number'
+};
 
 module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
+  const inputValidator = new Validator(inputConstraints, validatorContext);
+  const outputValidator = new Validator(outputConstraints, validatorContext);
   return {
     meta () {
       return Object.assign(
@@ -14,18 +18,22 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       );
     },
     validateInput (input) {
-      return validate(input, inputConstraints);
+      const results = inputValidator.validate(input);
+      if (results) {
+        return { inputErrors: results };
+      }
+      return undefined;
     },
     run (input) {
       // validate input
-      const inputValidateResults = validate(input, inputConstraints);
+      const inputValidateResults = inputValidator.validate(input);
       if (inputValidateResults) return { inputErrors: inputValidateResults };
 
       // run fn
       const output = fn(input);
       
       // validate output
-      const outputValidateResults = validate({ output }, outputConstraints);
+      const outputValidateResults = outputValidator.validate({ output });
       if (outputValidateResults) return { outputErrors: outputValidateResults}
 
       // completed successfully

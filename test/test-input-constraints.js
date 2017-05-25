@@ -3,10 +3,18 @@
 //   - where all members are numbers
 //   - at least 2 members
 module.exports = function () {
-  return {
-    numbers: {
-      dataType: 'array_of_numbers',
-      minArrayLength: 2
+  return [
+    {
+      id: 'numbers',
+      type: 'array',
+      required: true,
+      validations: [
+        {
+          fn: 'isNumber',
+          args: ['$value'],
+          message: 'All numbers must be of type number'
+        }
+      ]
     }
-  }
+  ];
 };
