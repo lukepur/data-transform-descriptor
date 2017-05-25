@@ -29,7 +29,7 @@ describe('data-transform-descriptor:', () => {
 
   describe('validateInput():', () => {
     it('should return undefined for correct input', () => {
-      expect(adder.validateInput({numbers: [1, 2]})).to.be.undefined;
+      expect(adder.validateInput({numbers: [1, 2, 7]})).to.be.undefined;
     });
 
     it('should return correct message for incorrect input', () => {
@@ -41,7 +41,7 @@ describe('data-transform-descriptor:', () => {
 
   describe('run():', () => {
     it('should return correct output for valid input', () => {
-      expect(adder.run({numbers: [1,2,3]})).to.eql(6);
+      expect(adder.run({numbers: [1,2,3,4]})).to.eql(10);
     });
 
     it('should return messages for incorrect input', () => {
@@ -49,6 +49,13 @@ describe('data-transform-descriptor:', () => {
       expect(result.length).to.eql(1);
       expect(result[0].target).to.eql('numbers.0');
       expect(result[0].message).to.eql('All numbers must be of type number');
+    });
+
+    it('should return message for subsequent validations if first validation passes', () => {
+      const result = adder.run({numbers: [1, 2]}).inputErrors;
+      expect(result.length).to.eql(1);
+      expect(result[0].target).to.eql('numbers.0');
+      expect(result[0].message).to.eql('input must sum to at least 10');
     });
 
     it('should return messages for null input', () => {

@@ -13,6 +13,17 @@ module.exports = function () {
           fn: 'isNumber',
           args: ['$value'],
           message: 'All numbers must be of type number'
+        },
+        {
+          fn: 'greaterThanOrEqual',
+          args: [
+            {
+              fn: 'arraySum',
+              args: ['$.numbers']
+            },
+            10
+          ],
+          message: 'input must sum to at least 10'
         }
       ]
     }
