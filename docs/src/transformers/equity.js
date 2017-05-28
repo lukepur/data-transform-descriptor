@@ -4,6 +4,7 @@ const inputConstraints = [
   {
     id: 'assets',
     type: 'array',
+    required: true,
     children: {
       type: 'object',
       children: [
@@ -35,6 +36,7 @@ const inputConstraints = [
   {
     id: 'liabilities',
     type: 'array',
+    required: true,
     children: {
       type: 'object',
       children: [

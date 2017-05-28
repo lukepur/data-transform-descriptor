@@ -13,6 +13,10 @@
         <div class="inputs-container">
           <ConstraintView path="$" :data="input" :constraintDescriptor="selectedTransformerInputConstraints" :update="update" />
         </div>
+        <ul>
+          <li v-for="message in inputErrors">{{ message.target }}: {{ message.message }}</li>
+        </ul>
+        <h2 v-if="result !== null">Result {{ result }}</h2>
         <div>
           <span>Input: {{ JSON.stringify(input) }} </span>
         </div>
@@ -31,7 +35,9 @@ export default {
   data () {
     return {
       selectedTransformerIndex: -1,
-      input: {}
+      input: {},
+      inputErrors: [],
+      result: null
     };
   },
   computed: {
@@ -49,11 +55,22 @@ export default {
     onTransformerChange (event) {
       this.selectedTransformerIndex = event.target.value;
       this.input = {};
+      this.inputErrors = [];
+      this.result = null;
     },
     update (path, value) {
       set(this.input, path.replace(/^\$\./, ''), value);
       // invoke reactivity:
       this.input = { ...this.input };
+      const validationErrors = this.selectedTransformer.validateInput(this.input);
+      if (validationErrors) {
+        const { inputErrors } = validationErrors;
+        if (inputErrors) this.inputErrors = [...inputErrors];
+        this.result = null;
+      } else {
+        this.result = this.selectedTransformer.run(this.input);
+        this.inputErrors = [];
+      }
     }
   },
   components: {
@@ -74,7 +91,6 @@ ul {
 }
 
 li {
-  display: inline-block;
   margin: 0 10px;
 }
 
