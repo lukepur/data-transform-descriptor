@@ -27,9 +27,6 @@ export default {
     stringEditor,
     arrayEditor,
     objectEditor
-  },
-  created () {
-    console.log(this.constraints);
   }
 }
 </script> 
