@@ -11,7 +11,7 @@
           </select>
         </div>
         <div class="inputs-container">
-          <EditorObject name="$" :constraints="selectedTransformerInputConstraints" :update="update" :value="input" />
+          <ConstraintView path="$" :data="input" :constraintDescriptor="selectedTransformerInputConstraints" :update="update" />
         </div>
         <div>
           <span>Input: {{ JSON.stringify(input) }} </span>
@@ -22,8 +22,9 @@
 </template>
 
 <script>
+import { set } from 'lodash';
 import { mapGetters } from 'vuex';
-import EditorObject from './editor-object.vue';
+import ConstraintView from './constraint-view.vue';
 
 export default {
   name: 'data-transformer-tester',
@@ -49,12 +50,14 @@ export default {
       this.selectedTransformerIndex = event.target.value;
       this.input = {};
     },
-    update (value) {
-      this.input = { ...value }
+    update (path, value) {
+      set(this.input, path.replace(/^\$\./, ''), value);
+      // invoke reactivity:
+      this.input = { ...this.input };
     }
   },
   components: {
-    EditorObject
+    ConstraintView
   }
 }
 </script>

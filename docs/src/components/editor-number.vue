@@ -1,20 +1,17 @@
 <template>
   <div class="editor-container editor-number">
     <div class="form-group">
-      <label>{{ name }}</label>
-      <input type="number" :value="value" @change="e=>update(e.target.value)"/>
+      <label>{{ path }}</label>
+      <input type="number" :value="value" @change="updatePath"/>
     </div>
   </div>
 </template>
 
 <script>
+import pathEditor from '../mixins/path-editor';
+
 export default {
   name: 'editor-number',
-  props: {
-    name: String,
-    constraints: Object,
-    value: [Number, String],
-    update: Function
-  }
+  mixins: [pathEditor]
 }
 </script> 

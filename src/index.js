@@ -1,9 +1,5 @@
 const Validator = require('data-structure-validator');
-const validatorContext = {
-  isNumber: value => typeof value === 'number',
-  arraySum: arr => arr.reduce((memo, item) => memo + item, 0),
-  greaterThanOrEqual: (num, target) => num >= target
-};
+const validatorContext = require('./validation-context/validation-context');
 
 module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
   const inputValidator = new Validator(inputConstraints, validatorContext);
@@ -19,6 +15,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
         }
       );
     },
+
     validateInput (input) {
       const results = inputValidator.validate(input);
       if (results) {
@@ -26,6 +23,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       }
       return undefined;
     },
+
     run (input) {
       // validate input
       const inputValidateResults = inputValidator.validate(input);

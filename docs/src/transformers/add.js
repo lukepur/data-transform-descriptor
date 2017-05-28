@@ -1,13 +1,28 @@
 import CreateTransformer from 'data-transform-descriptor';
 
-const inputConstraints = {
-  a: { presence: true, dataType: 'number' },
-  b: { presence: true, dataType: 'number' }
-};
-const outputConstraints = {
-  output: { presence: true, dataType: 'number' }
-};
+const inputConstraints = [
+  {
+    id: 'a',
+    type: 'number',
+    required: true
+  },
+  {
+    id: 'b',
+    type: 'number',
+    required: true
+  }
+];
+
+const outputConstraints = [
+  {
+    id: 'output',
+    type: 'number',
+    required: true
+  }
+];
+
 const fn = (input) => input.a + input.b;
+
 const meta = {
   name: 'Add'
 };

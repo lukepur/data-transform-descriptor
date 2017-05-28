@@ -1,9 +1,9 @@
 <template>
   <div class="editor-container editor-object">
-    <h5>{{ name }}</h5>
+    <h5>{{ path }}</h5>
     <div class="object-items">
-      <div v-for="(item, key) in constraints" class="object-item">
-        <component :is="item.dataType+'Editor'" :name="key" :constraints="item" :value="value[key]" :update="updateFnFor(key)"/>
+      <div v-for="(item, key) in constraints.children" class="object-item">
+        <component :is="item.type+'Editor'" :path="`${path}.${item.id}`" :constraints="item" :data="data" :update="update"/>
       </div>
     </div>
   </div>
@@ -11,27 +11,25 @@
 
 <script>
 import numberEditor from './editor-number.vue';
+import stringEditor from './editor-string.vue';
+import arrayEditor from './editor-array.vue';
+import objectEditor from './editor-object.vue';
+import pathEditor from '../mixins/path-editor';
 
 export default {
   name: 'editor-object',
+  mixins: [pathEditor],
   props: {
-    name: String,
-    constraints: Object,
-    value: Object,
-    update: Function
-  },
-  methods: {
-    updateFnFor (prop) {
-      return value => {
-        this.update({
-          ...this.value,
-          [prop]: value
-        });
-      };
-    }
+    constraints: Object
   },
   components: {
-    numberEditor
+    numberEditor,
+    stringEditor,
+    arrayEditor,
+    objectEditor
+  },
+  created () {
+    console.log(this.constraints);
   }
 }
 </script> 
