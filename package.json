@@ -1,6 +1,6 @@
 {
   "name": "data-transform-descriptor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A tiny module to describe and implement data transforms/mappings.",
   "main": "dist/index.js",
   "engines": {
