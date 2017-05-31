@@ -1,6 +1,6 @@
 {
   "name": "data-transform-descriptor",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A tiny module to describe and implement data transforms/mappings.",
   "main": "dist/index.js",
   "engines": {
@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "data-structure-validator": "0.0.5"
+    "data-structure-validator": "0.0.6"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
