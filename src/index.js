@@ -1,3 +1,4 @@
+const Q = require('q');
 const Validator = require('data-structure-validator');
 const validatorContext = require('./validation-context/validation-context');
 
@@ -16,7 +17,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       );
     },
 
-    validateInput (input) {
+    validateInput (input, isAsync = false) {
       const results = inputValidator.validate(input);
       if (results) {
         return { inputErrors: results };
@@ -34,10 +35,30 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       
       // validate output
       const outputValidateResults = outputValidator.validate({ output });
-      if (outputValidateResults) return { outputErrors: outputValidateResults}
+      if (outputValidateResults) return { outputErrors: outputValidateResults };
 
       // completed successfully
       return output;
+    },
+
+    runAsync (input) {
+      const deferred = Q.defer();
+      // validate input
+      const inputValidateResults = inputValidator.validate(input);
+      if (inputValidateResults) deferred.resolve({ inputErrors: inputValidateResults });
+
+      // run fn
+      Q(fn(input))
+      .then(output => {
+        // validate output
+        const outputValidateResults = outputValidator.validate({ output });
+        if (outputValidateResults) deferred.resolve({ outputErrors: outputValidateResults });
+
+        // completed successfully
+        deferred.resolve(output);
+      });
+      
+      return deferred.promise;
     }
   }
 };

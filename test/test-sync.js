@@ -2,9 +2,9 @@ const { expect } = require('chai');
 const Transformer = require('../src/index');
 const inputConstraints = require('./test-input-constraints');
 const outputConstraints = require('./test-output-constraints');
-const fn = require('./test-input-fn');
+const fns = require('./test-fn');
 
-const adder = Transformer(inputConstraints(), outputConstraints(), fn, {name: 'Worker'});
+const adder = Transformer(inputConstraints(), outputConstraints(), fns.arraySum, {name: 'Worker'});
 
 describe('data-transform-descriptor:', () => {
   it('should be a function', () => {
