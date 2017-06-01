@@ -2,16 +2,18 @@ const Q = require('q');
 
 // Simple worker functions to add an array of numbers
 module.exports = {
-    arraySum: (input) => {
-        return input.numbers.reduce((memo, item) => {
+    arraySum: (input, ctx) => {
+        const { reduce } = ctx;
+        return reduce(input.numbers, (memo, item) => {
             return memo + item;
         }, 0);
     },
-    arraySumAsync: (input) => {
+    arraySumAsync: (input, ctx) => {
         const deferred = Q.defer();
+        const { reduce } = ctx;
         
         deferred.resolve(
-            input.numbers.reduce((memo, item) => {
+            reduce(input.numbers, (memo, item) => {
                 return memo + item;
             }, 0)
         );

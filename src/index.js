@@ -1,10 +1,18 @@
 const Q = require('q');
+const { assign } = require('lodash');
 const Validator = require('data-structure-validator');
 const validatorContext = require('./validation-context/validation-context');
+const DEFUALT_EXECUTION_CTX = require('./execution-context/execution-context');
 
-module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
+module.exports = function (inputConstraints, outputConstraints, fn, meta = {}, executionCtx = {}) {
   const inputValidator = new Validator(inputConstraints, validatorContext);
   const outputValidator = new Validator(outputConstraints, validatorContext);
+  const ctx = assign(
+    {},
+    DEFUALT_EXECUTION_CTX,
+    executionCtx
+  );
+
   return {
     meta () {
       return Object.assign(
@@ -31,7 +39,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       if (inputValidateResults) return { inputErrors: inputValidateResults };
 
       // run fn
-      const output = fn(input);
+      const output = fn(input, ctx);
       
       // validate output
       const outputValidateResults = outputValidator.validate({ output });
@@ -48,7 +56,7 @@ module.exports = function (inputConstraints, outputConstraints, fn, meta = {}) {
       if (inputValidateResults) deferred.resolve({ inputErrors: inputValidateResults });
 
       // run fn
-      Q(fn(input))
+      Q(fn(input, ctx))
       .then(output => {
         // validate output
         const outputValidateResults = outputValidator.validate({ output });
